@@ -1,7 +1,9 @@
 package com.mytasks.api.controllers;
 
+import com.mytasks.api.dtos.AuthResponseRecordDto;
 import com.mytasks.api.dtos.UserAuthRecordDto;
 import com.mytasks.api.dtos.UserRecordDto;
+import com.mytasks.api.infra.security.TokenService;
 import com.mytasks.api.models.UserModel;
 import com.mytasks.api.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -13,15 +15,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
 
-    public UserController(UserService userService, AuthenticationManager authenticationManager) {
+    public UserController(UserService userService, AuthenticationManager authenticationManager, TokenService tokenService) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
+        this.tokenService = tokenService;
     }
 
     @PostMapping
@@ -35,6 +38,8 @@ public class UserController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.username(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((UserModel) auth.getPrincipal());
+
+        return ResponseEntity.ok(new AuthResponseRecordDto(token));
     }
 }

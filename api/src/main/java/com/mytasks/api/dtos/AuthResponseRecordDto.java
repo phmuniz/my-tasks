@@ -1,4 +1,5 @@
 package com.mytasks.api.dtos;
 
-public record AuthResponseRecordDto() {
+public record AuthResponseRecordDto(String token) {
 }
+
