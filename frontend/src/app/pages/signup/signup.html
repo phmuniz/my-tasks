@@ -9,19 +9,19 @@
     <form class="mt-7 flex flex-col gap-5" [formGroup]="form">
 
       <input
-        class="p-2 text-lg focus:outline-0 border-b border-b-black"
+        class="p-2 text-lg focus:outline-0 border-b border-b-black placeholder:text-gray-700"
         placeholder="nome"
         formControlName="name"
         type="text">
 
       <input
-        class="p-2 text-lg focus:outline-0 border-b border-b-black"
+        class="p-2 text-lg focus:outline-0 border-b border-b-black placeholder:text-gray-700"
         placeholder="usuario"
         formControlName="username"
         type="text">
 
       <input
-        class="p-2 text-lg focus:outline-0 border-b border-b-black"
+        class="p-2 text-lg focus:outline-0 border-b border-b-black placeholder:text-gray-700"
         placeholder="senha"
         formControlName="password"
         type="password">
@@ -32,10 +32,6 @@
       <div>
         <span>Já tem uma conta? </span>
         <button [routerLink]="['/']" routerLinkActive="router-link-active" class="text-blue-900 font-bold">Entre</button>
-      </div>
-
-      <div>
-        <span>{{message}}</span>
       </div>
 
     </form>

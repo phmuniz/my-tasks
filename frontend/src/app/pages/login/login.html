@@ -6,20 +6,22 @@
     <h1 class="text-5xl font-bold">MyTasks</h1>
 
 
-    <form action="" class="mt-7 flex flex-col gap-5">
+    <form action="" class="mt-7 flex flex-col gap-5" [formGroup]="form" (ngSubmit)="auth()">
 
       <input
-        class="p-2 text-lg focus:outline-0 border-b border-b-black"
+        class="p-2 text-lg focus:outline-0 border-b border-b-black placeholder:text-gray-700"
+        formControlName="username"
         placeholder="usuario"
         type="text">
 
       <input
-        class="p-2 text-lg focus:outline-0 border-b border-b-black"
+        class="p-2 text-lg focus:outline-0 border-b border-b-black placeholder:text-gray-700"
+        formControlName="password"
         placeholder="senha"
         type="password">
 
 
-      <button class="rounded-md p-5 bg-gray-800 text-white cursor-pointer">Entrar</button>
+      <button type="submit" class="rounded-md p-5 bg-gray-800 text-white cursor-pointer">Entrar</button>
 
       <div>
         <span>Ainda não tem uma conta? </span>
