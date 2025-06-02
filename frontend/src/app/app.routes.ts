@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
 import { Signup } from './pages/signup/signup';
 import { Middleware } from './services/middleware';
-import { Home } from './pages/home/home/home';
+import { Home } from './pages/home/home';
 
 export const routes: Routes = [
 

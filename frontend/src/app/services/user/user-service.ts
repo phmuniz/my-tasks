@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -27,6 +27,18 @@ export class UserService {
 
     return res
 
+  }
+
+  getUser() {
+
+    const token = this.cookieService.get('token')
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Custom-Header': 'valor',
+    });
+
+    return this.api.get('http://localhost:8080/users', {headers})
   }
 
   authUser(username: string, password: string) {
