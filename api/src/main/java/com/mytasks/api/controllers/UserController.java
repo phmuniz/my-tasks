@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +34,19 @@ public class UserController {
     public ResponseEntity<UserModel> saveUser(@RequestBody UserRecordDto userRecordDto) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(userRecordDto));
+    }
+
+    @GetMapping
+    public ResponseEntity<UserDetails> getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        var user = (UserDetails) authentication.getPrincipal();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.loadUserByUsername(user.getUsername()));
     }
 
     @PostMapping("/auth")
