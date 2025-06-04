@@ -1,0 +1,26 @@
+services:
+  db:
+    image: mysql
+    container_name: db-mytasks
+    environment:
+      MYSQL_ROOT_PASSWORD: mytasks123
+    volumes:
+      - vol-mytasks-db:/var/lib/mysql
+
+  api:
+    build: "./api"
+    container_name: api-mytasks
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
+    
+volumes:
+  vol-mytasks-db:
