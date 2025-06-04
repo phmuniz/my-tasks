@@ -1,14 +1,12 @@
 package com.mytasks.api.controllers;
 
+import com.mytasks.api.dtos.TaskHandleCompletedRecordDto;
 import com.mytasks.api.dtos.TaskRecordDto;
 import com.mytasks.api.models.TaskModel;
 import com.mytasks.api.services.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tasks")
@@ -24,5 +22,11 @@ public class TaskController {
     public ResponseEntity<TaskModel> saveTask(@RequestBody TaskRecordDto taskRecordDto) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.saveTask(taskRecordDto));
+    }
+
+    @PutMapping
+    public ResponseEntity<TaskModel> handleCompletedTask(@RequestBody TaskHandleCompletedRecordDto taskRecordDto) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.handleCompleted(taskRecordDto));
     }
 }
