@@ -29,4 +29,12 @@ public class TaskController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.handleCompleted(taskRecordDto));
     }
+
+    @DeleteMapping
+    public ResponseEntity<TaskModel> deleteTask(@RequestBody TaskHandleCompletedRecordDto taskRecordDto) {
+
+        TaskModel task = taskService.deleteTask(taskRecordDto);
+
+        return ResponseEntity.ok().build();
+    }
 }

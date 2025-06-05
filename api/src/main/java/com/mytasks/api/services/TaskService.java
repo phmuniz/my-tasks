@@ -44,4 +44,14 @@ public class TaskService {
 
         return taskRepository.save(task);
     }
+
+    @Transactional
+    public TaskModel deleteTask(TaskHandleCompletedRecordDto taskHandleCompletedRecordDto) {
+
+        TaskModel task = taskRepository.findById(taskHandleCompletedRecordDto.taskId()).isPresent() ? taskRepository.findById(taskHandleCompletedRecordDto.taskId()).get() : null;
+
+        taskRepository.delete(task);
+
+        return task;
+    }
 }
