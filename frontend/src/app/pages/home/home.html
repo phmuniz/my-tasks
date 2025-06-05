@@ -46,8 +46,26 @@
     <!-- Tasks Area -->
     <div class="flex md:flex-row flex-col mt-8">
 
-      <div class="flex flex-col w-[30%]">
-        <span>Filtros</span>
+      <div class="flex flex-col md:w-[30%] text-white justify-center items-center">
+        <span class="text-lg font-medium mb-2">Filtros</span>
+
+        <form action="">
+
+          <div>
+            <input name="all" type="checkbox">
+            <label for="all" class="pl-2">Todas</label>
+          </div>
+
+          <div>
+            <input name="completed" type="checkbox">
+            <label for="completed" class="pl-2">Completadas</label>
+          </div>
+
+          <div>
+            <input name="to-do" type="checkbox">
+            <label for="to-do" class="pl-2">A fazer</label>
+          </div>
+        </form>
       </div>
 
       <div class="flex flex-col md:w-[70%] w-full">
