@@ -62,6 +62,20 @@ export class Home implements OnInit{
     window.location.reload()
   }
 
+  async deleteTask(taskId: string) {
+
+    await this.taskService.deleteTask(taskId)
+
+    window.location.reload()
+  }
+
+  async handleCompletedTask(taskId: string) {
+
+    await this.taskService.handleCompletedTask(taskId)
+
+    window.location.reload()
+  }
+
   handleInputTask() {
     this.showInputTask = !this.showInputTask
   }

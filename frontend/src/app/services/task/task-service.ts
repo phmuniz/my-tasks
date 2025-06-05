@@ -33,4 +33,53 @@ export class TaskService {
       }
     })
   }
+
+  deleteTask(taskId: string) {
+
+    if(!taskId){
+      alert('Erro ao deletar task.')
+      return
+    }
+
+    const token = this.cookieService.get('token')
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Custom-Header': 'valor',
+    });
+
+    this.api.delete('http://localhost:8080/tasks', {
+      headers,
+      body: {taskId}
+    }).subscribe({
+      error: (err) => {
+        console.log(err)
+        alert('Erro ao deletar task.')
+      }
+    })
+  }
+
+  handleCompletedTask(taskId: string) {
+
+    if(!taskId){
+      alert('Erro ao atualizar task.')
+      return
+    }
+
+    const token = this.cookieService.get('token')
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Custom-Header': 'valor',
+    });
+
+    this.api.put('http://localhost:8080/tasks', {
+      taskId
+    }, {headers}).subscribe({
+      error: (err) => {
+        console.log(err)
+        alert('Erro ao atualizar task.')
+      }
+    })
+  }
 }
