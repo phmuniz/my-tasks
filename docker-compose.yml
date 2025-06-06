@@ -21,6 +21,15 @@ services:
       - 8081:80
     environment:
       - PMA_ARBITRARY=1
+
+  frontend:
+    build: "./frontend"
+    container_name: front-mytasks
+    ports:
+      - 4200:4200
+    depends_on:
+      - db
+      - api
     
 volumes:
   vol-mytasks-db:
