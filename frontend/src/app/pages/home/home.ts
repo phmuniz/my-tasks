@@ -7,6 +7,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { TaskService } from '../../services/task/task-service';
 import { Router, RouterModule } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -22,10 +23,10 @@ export class Home implements OnInit{
   private cdRef = inject(ChangeDetectorRef);
 
   showInputTask: boolean = false
-
+  filter: string = 'all'
   form: FormGroup
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private cookieService: CookieService) {
 
     this.form = this.fb.group({
       'description': ['', Validators.required]
@@ -78,5 +79,17 @@ export class Home implements OnInit{
 
   handleInputTask() {
     this.showInputTask = !this.showInputTask
+  }
+
+  selectFilter(value: string) {
+
+    this.filter = value
+  }
+
+  logout() {
+
+    this.cookieService.delete('token')
+
+    window.location.reload()
   }
 }

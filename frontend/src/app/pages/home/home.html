@@ -4,11 +4,23 @@
   <div class="flex flex-col md:w-[50%] w-[90%]">
 
     <!-- Header -->
-    <div class="flex sm:flex-row flex-col relative text-white mt-4">
+    <div class="flex sm:items-center h-max sm:flex-row flex-col relative text-white mt-8 border-white border-b py-3">
 
       <h1 class="text-5xl font-bold text-white">MyTasks</h1>
 
-      <span class="absolute right-2 top-3 text-xl font-medium">Bem vindo, {{user.name}}!</span>
+      <div class="w-full flex flex-col gap-2 justify-center items-end sm:mt-5">
+
+        <span class="text-xl font-medium">Bem vindo, {{user.name}}!</span>
+
+        <button class="flex gap-2 items-center justify-center font-medium hover:text-red-500" (click)="logout()">
+          <span>Logout</span>
+
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+          </svg>
+
+        </button>
+      </div>
     </div>
 
     <!-- Form to create tasks -->
@@ -44,7 +56,7 @@
     </div>
 
     <!-- Tasks Area -->
-    <div class="flex md:flex-row flex-col mt-8">
+    <div class="flex md:flex-row flex-col mt-8 gap-7 md:gap-0">
 
       <div class="flex flex-col md:w-[30%] text-white justify-center items-center">
         <span class="text-lg font-medium mb-2">Filtros</span>
@@ -52,17 +64,17 @@
         <form action="">
 
           <div>
-            <input name="all" type="checkbox">
+            <input id="all" type="checkbox" [checked]="filter === 'all'" (change)="selectFilter('all')">
             <label for="all" class="pl-2">Todas</label>
           </div>
 
           <div>
-            <input name="completed" type="checkbox">
+            <input id="completed" type="checkbox" [checked]="filter === 'completed'" (change)="selectFilter('completed')">
             <label for="completed" class="pl-2">Completadas</label>
           </div>
 
           <div>
-            <input name="to-do" type="checkbox">
+            <input id="to-do" type="checkbox" [checked]="filter === 'to-do'" (change)="selectFilter('to-do')">
             <label for="to-do" class="pl-2">A fazer</label>
           </div>
         </form>
@@ -82,7 +94,7 @@
 
           @for(task of user.tasks; track task.id) {
 
-            @if(task.completed) {
+            @if(task.completed && (filter === 'all' || filter === 'completed')) {
               <div class="relative flex bg-green-300 p-2 border border-b-black">
 
                   <span class="flex justify-center text-md">
@@ -106,7 +118,7 @@
                   </div>
               </div>
             }
-            @else {
+            @else if(!task.completed && (filter === 'all' || filter === 'to-do')) {
 
               <div class="relative flex bg-gray-100 p-2 border border-b-black">
 
