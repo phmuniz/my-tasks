@@ -19,7 +19,7 @@ O projeto my-tasks foi feito com o objetivo de praticar o desenvolvimento utiliz
     - Docker compose
 ## Como rodar o projeto?
 
-Para rodar o projeto basta rodar o seguinte comando:
+Para rodar o projeto basta ter o docker instalado na sua máquina e rodar o seguinte comando:
 
 ```bash
 docker-compose up -d
