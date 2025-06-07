@@ -7,6 +7,11 @@ services:
       MYSQL_DATABASE: mytasks
     volumes:
       - vol-mytasks-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pmytasks123"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   api:
     build: "./api"
