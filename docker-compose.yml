@@ -4,6 +4,7 @@ services:
     container_name: db-mytasks
     environment:
       MYSQL_ROOT_PASSWORD: mytasks123
+      MYSQL_DATABASE: mytasks
     volumes:
       - vol-mytasks-db:/var/lib/mysql
 
