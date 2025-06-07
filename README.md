@@ -21,4 +21,8 @@ O projeto my-tasks foi feito com o objetivo de praticar o desenvolvimento utiliz
 
 Para rodar o projeto basta rodar o seguinte comando:
 
+```bash
+docker-compose up -d
+```
+
 Pronto! O projeto estará disponível em http://localhost:4200
