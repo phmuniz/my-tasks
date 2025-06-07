@@ -1,6 +1,6 @@
 # My Tasks
 
-O projeto my-tasks foi feito com o objetivo de praticar o desenvolvimento utilizando as ferramentas Angular, Spring Boot e docker. Se trata de um app web voltado para criação de tarefas, com sistema de filtros e home page personalizada ao usuário.
+O projeto my-tasks foi feito com o objetivo de praticar o desenvolvimento utilizando as ferramentas Angular, Spring Boot, MySQL e Docker. Se trata de um app web voltado para criação de tarefas, com sistema de filtros e home page personalizada ao usuário.
 
 ## Ferramentas utilizadas
 - MySQL (Database)
