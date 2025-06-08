@@ -24,6 +24,7 @@ public class UserModel implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @OrderBy("createdAt DESC")
     private Set<TaskModel> tasks = new HashSet<>();
 
     public UUID getId() {

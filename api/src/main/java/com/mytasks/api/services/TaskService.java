@@ -8,6 +8,7 @@ import com.mytasks.api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -29,6 +30,7 @@ public class TaskService {
         task.setDescription(taskRecordDto.description());
         task.setCompleted(false);
         task.setUser(userRepository.findById(taskRecordDto.user_id()).isPresent() ? userRepository.findById(taskRecordDto.user_id()).get() : null);
+        task.setCreatedAt(LocalDateTime.now());
 
         return taskRepository.save(task);
     }

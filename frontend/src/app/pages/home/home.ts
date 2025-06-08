@@ -60,6 +60,7 @@ export class Home implements OnInit{
     await this.taskService.saveTask(description, this.user?.id)
 
     this.getUser()
+    this.showInputTask = false
   }
 
   async deleteTask(taskId: string) {
