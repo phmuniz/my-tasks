@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user-service';
 import { UserModel } from '../../models/UserModel';
-import { TaskModel } from '../../models/TaskModel';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { TaskService } from '../../services/task/task-service';
@@ -33,9 +32,9 @@ export class Home implements OnInit{
     })
   }
 
-  async getUser() {
+  getUser() {
 
-    await this.userService.getUser()
+    this.userService.getUser()
         .subscribe(
           (res: any) => {
             this.user = res as UserModel
@@ -60,21 +59,21 @@ export class Home implements OnInit{
 
     await this.taskService.saveTask(description, this.user?.id)
 
-    window.location.reload()
+    this.getUser()
   }
 
   async deleteTask(taskId: string) {
 
     await this.taskService.deleteTask(taskId)
 
-    window.location.reload()
+    this.getUser()
   }
 
   async handleCompletedTask(taskId: string) {
 
     await this.taskService.handleCompletedTask(taskId)
 
-    window.location.reload()
+    this.getUser()
   }
 
   handleInputTask() {

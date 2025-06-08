@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class TaskService {
 
   constructor(private api: HttpClient, private cookieService: CookieService) { }
 
-  saveTask(description: string, user_id: string | undefined) {
+  async saveTask(description: string, user_id: string | undefined) {
 
     if(!user_id){
       alert('Erro ao criar task.')
@@ -23,18 +24,22 @@ export class TaskService {
       'Custom-Header': 'valor',
     });
 
-    this.api.post('http://localhost:8080/tasks', {
-      description,
-      user_id
-    }, {headers}).subscribe({
-      error: (err) => {
-        console.log(err)
-        alert('Erro ao criar task.')
-      }
-    })
+
+    try {
+
+      await firstValueFrom(this.api.post('http://localhost:8080/tasks', {
+        description,
+        user_id
+      }, {headers}))
+    }
+    catch(err) {
+      console.log(err)
+      alert('Erro ao criar task.')
+    }
+
   }
 
-  deleteTask(taskId: string) {
+  async deleteTask(taskId: string) {
 
     if(!taskId){
       alert('Erro ao deletar task.')
@@ -48,18 +53,20 @@ export class TaskService {
       'Custom-Header': 'valor',
     });
 
-    this.api.delete('http://localhost:8080/tasks', {
-      headers,
-      body: {taskId}
-    }).subscribe({
-      error: (err) => {
-        console.log(err)
-        alert('Erro ao deletar task.')
-      }
-    })
+    try {
+
+      await firstValueFrom(this.api.delete('http://localhost:8080/tasks', {
+        headers,
+        body: {taskId}
+      }))
+    }
+    catch(err) {
+      console.log(err)
+      alert('Erro ao deletar task.')
+    }
   }
 
-  handleCompletedTask(taskId: string) {
+  async handleCompletedTask(taskId: string) {
 
     if(!taskId){
       alert('Erro ao atualizar task.')
@@ -73,13 +80,15 @@ export class TaskService {
       'Custom-Header': 'valor',
     });
 
-    this.api.put('http://localhost:8080/tasks', {
-      taskId
-    }, {headers}).subscribe({
-      error: (err) => {
-        console.log(err)
-        alert('Erro ao atualizar task.')
-      }
-    })
+    try {
+
+      await firstValueFrom(this.api.put('http://localhost:8080/tasks', {
+        taskId
+      }, {headers}))
+    }
+    catch(err) {
+      console.log(err)
+      alert('Erro ao atualizar task.')
+    }
   }
 }
